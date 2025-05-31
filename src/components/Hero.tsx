@@ -13,8 +13,14 @@ const Hero = () => {
         <div className="absolute bottom-1/4 left-1/2 w-48 h-48 bg-slate-400 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
 
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23374151\" fill-opacity=\"0.1\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"1\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+      {/* Grid pattern overlay - simplified */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="grid grid-cols-12 h-full">
+          {[...Array(144)].map((_, i) => (
+            <div key={i} className="border-r border-b border-slate-600 border-opacity-20"></div>
+          ))}
+        </div>
+      </div>
 
       <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
         <div className="animate-fade-in">
