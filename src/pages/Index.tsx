@@ -1,13 +1,55 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import Navigation from '@/components/Navigation';
+import Hero from '@/components/Hero';
+import ModuleGallery from '@/components/ModuleGallery';
+import ModuleDetail from '@/components/ModuleDetail';
+import Footer from '@/components/Footer';
+import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
+  const [selectedModule, setSelectedModule] = useState(null);
+
+  const handleModuleSelect = (module: any) => {
+    setSelectedModule(module);
+  };
+
+  const handleBackToGallery = () => {
+    setSelectedModule(null);
+  };
+
+  const handleDownload = () => {
+    toast({
+      title: "¡Descarga iniciada!",
+      description: `El módulo ${selectedModule?.title} se está descargando...`,
+      duration: 3000,
+    });
+    console.log(`Downloading module: ${selectedModule?.title}`);
+  };
+
+  if (selectedModule) {
+    return (
+      <>
+        <Navigation />
+        <ModuleDetail 
+          module={selectedModule}
+          onBack={handleBackToGallery}
+          onDownload={handleDownload}
+        />
+        <Footer />
+      </>
+    );
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <>
+      <Navigation />
+      <Hero />
+      <div id="modules">
+        <ModuleGallery onModuleSelect={handleModuleSelect} />
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
